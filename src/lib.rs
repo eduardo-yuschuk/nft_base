@@ -118,55 +118,52 @@ impl Base {
 #[macro_export]
 macro_rules! define_script {
 	($name:ident($($parent:ident),+) {$($field_name:ident : $field_type:ty),*} $($custom:expr),*) => {
-        //use nft::NFT_TYPE_ARGS_LEN;
 		#[derive(Debug)]
 		struct $name { $($field_name: $field_type),* }
 		impl $name {
-            pub fn validate_nft_args(_nft_type: &Script) -> Result<(), Error> {
-                // let nft_args: Bytes = nft_type.args().unpack();
-                // if nft_args.len() != NFT_TYPE_ARGS_LEN {
-                //     return Err(Error::TypeArgsInvalid);
-                // }
+            pub fn validate_nft_args(nft_type: &Script) -> Result<(), Error> {
+                let nft_args: Bytes = nft_type.args().unpack();
+                if nft_args.len() != nft::NFT_TYPE_ARGS_LEN {
+                    return Err(Error::TypeArgsInvalid);
+                }
                 Ok(())
             }
-			fn handle_creation(_nft_type: &Script) -> Result<(), Error> {
-				// let results = [$($parent :: handle_creation(nft_type)),+$(, $custom())*];
-                // for result in results {
-                //     match result {
-                //         Ok(_) => {},
-                //         Err(err) => {
-                //             return Err(err);
-                //         }
-                //     }
-                // }
+			fn handle_creation(nft_type: &Script) -> Result<(), Error> {
+				let results = [$($parent :: handle_creation(nft_type)),+$(, $custom())*];
+                for result in results {
+                    match result {
+                        Ok(_) => {},
+                        Err(err) => {
+                            return Err(err);
+                        }
+                    }
+                }
                 Ok(())
 			}
-            fn handle_update(_nft_type: &Script) -> Result<(), Error> {
-				// let results = [$($parent :: handle_update(nft_type)),+$(, $custom())*];
-                // for result in results {
-                //     match result {
-                //         Ok(_) => {},
-                //         Err(err) => {
-                //             return Err(err);
-                //         }
-                //     }
-                // }
+            fn handle_update(nft_type: &Script) -> Result<(), Error> {
+				let results = [$($parent :: handle_update(nft_type)),+$(, $custom())*];
+                for result in results {
+                    match result {
+                        Ok(_) => {},
+                        Err(err) => {
+                            return Err(err);
+                        }
+                    }
+                }
                 Ok(())
 			}
-            fn handle_destroying(_nft_type: &Script) -> Result<(), Error> {
-				// let results = [$($parent :: handle_destroying(nft_type)),+$(, $custom())*];
-                // for result in results {
-                //     match result {
-                //         Ok(_) => {},
-                //         Err(err) => {
-                //             return Err(err);
-                //         }
-                //     }
-                // }
+            fn handle_destroying(nft_type: &Script) -> Result<(), Error> {
+				let results = [$($parent :: handle_destroying(nft_type)),+$(, $custom())*];
+                for result in results {
+                    match result {
+                        Ok(_) => {},
+                        Err(err) => {
+                            return Err(err);
+                        }
+                    }
+                }
                 Ok(())
 			}
 		}
 	};
 }
-
-define_script! { ComposedScript(Base) { } }
