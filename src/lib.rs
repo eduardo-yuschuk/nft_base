@@ -117,7 +117,7 @@ impl Base {
 #[macro_export]
 macro_rules! define_script {
 	($name:ident($($parent:ident),+) {$($field_name:ident : $field_type:ty),*} $($custom:expr),*) => {
-        use script_utils::nft::NFT_TYPE_ARGS_LEN;
+        use nft::NFT_TYPE_ARGS_LEN;
 		#[allow(dead_code)]
 		#[derive(Debug)]
 		struct $name { $($field_name: $field_type),* }
