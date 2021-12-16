@@ -1,6 +1,6 @@
 use ckb_std::ckb_types::packed::*;
 use core::result::Result;
-use script_utils::error::Error;
+use crate::error::Error;
 
 pub struct OnlyOwner;
 
