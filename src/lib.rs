@@ -6,7 +6,7 @@ pub mod factory;
 pub mod nft;
 pub mod error;
 pub mod helper;
-pub mod extensions;
+pub mod extension;
 
 use blake2b_rs::Blake2bBuilder;
 use ckb_std::{
