@@ -6,8 +6,8 @@ pub struct OnlyOwner;
 
 impl OnlyOwner {
     pub fn handle_creation(_nft_type: &Script) -> Result<(), Error> {
-        Err(Error::NFTDataInvalid)
-        //Ok(())
+        //Err(Error::NFTDataInvalid)
+        Ok(())
     }
 
     pub fn handle_update(_nft_type: &Script) -> Result<(), Error> {
